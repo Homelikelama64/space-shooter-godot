@@ -20,7 +20,7 @@ func _process(dt: float) -> void:
 			Global.paused = false
 		if !temp:
 			Global.paused = true
-	if !Global.paused:
+	if !(Global.paused || Global.dead):
 		time += dt
 	get_tree().paused = Global.paused || Global.dead
 	var blur:ColorRect = get_node("Camera2D/ColorRect")

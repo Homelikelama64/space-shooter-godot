@@ -12,7 +12,7 @@ shader_parameter/tint = Vector4(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l65gc"]
 shader = ExtResource("2_ys0vu")
-shader_parameter/position = Vector2(0, 0)
+shader_parameter/position = Vector2(0, 4840.4)
 shader_parameter/scale = 500.0
 shader_parameter/cutoff = 0.997
 shader_parameter/gamma = 0.14

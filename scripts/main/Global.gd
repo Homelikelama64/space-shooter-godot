@@ -32,6 +32,11 @@ func collisions(player:Node2D) -> void:
 					player_part.health -= bullet.damage
 					bullets.pop_at(get_index_of_object(bullets,bullet))
 					bullet.queue_free()
+					var explosion = explosion_resoure.instantiate()
+					explosion.global_position = bullet.global_position
+					explosion.emitting = true
+					explosion.scale = Vector2(0.1,0.1)
+					get_tree().root.add_child(explosion)
 		if !(player_part.health >= 0):
 			Global.dead = true
 	
@@ -48,6 +53,11 @@ func collisions(player:Node2D) -> void:
 						ememy_a_part.health -= bullet.damage
 						bullets.pop_at(get_index_of_object(bullets,bullet))
 						bullet.queue_free()
+						var explosion = explosion_resoure.instantiate()
+						explosion.global_position = bullet.global_position
+						explosion.emitting = true
+						explosion.scale = Vector2(0.1,0.1)
+						get_tree().root.add_child(explosion)
 	for enemy in enemies:
 		for part in enemy.parts:
 			if !(part.health > 0.0):

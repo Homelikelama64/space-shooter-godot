@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://2vrar5oimq7w"]
+[gd_scene load_steps=12 format=3 uid="uid://2vrar5oimq7w"]
 
 [ext_resource type="Script" path="res://scripts/main/Camera2D.gd" id="1_3ni0c"]
 [ext_resource type="Shader" path="res://shaders/background.gdshader" id="1_18s1q"]
 [ext_resource type="Script" path="res://scripts/main/main.gd" id="1_s8dlj"]
 [ext_resource type="PackedScene" uid="uid://cnnkq0ck7enoe" path="res://scenes/main/V1Ship.tscn" id="1_t7232"]
-[ext_resource type="Script" path="res://scripts/main/Fps.gd" id="2_gmkf5"]
 [ext_resource type="Texture2D" uid="uid://b6ygtpy03uwyn" path="res://Assets/blank.png" id="3_tbksx"]
 [ext_resource type="Script" path="res://scripts/main/background.gd" id="4_ipepv"]
 [ext_resource type="Material" uid="uid://dvk7c1gwgooq2" path="res://materials/blur.tres" id="5_7b0vs"]
@@ -34,15 +33,16 @@ process_mode = 1
 process_mode = 1
 script = ExtResource("8_ugngb")
 time = 4.0
+min_interval = 3.0
 
 [node name="Wave2" type="Node2D" parent="."]
 process_mode = 1
 script = ExtResource("8_ugngb")
 time = 5.0
-interval = 20.0
+interval = 30.0
 path = "scenes/main/V2Enemy.tscn"
-min_interval = 6.0
-interval_delta = 1.0
+min_interval = 12.0
+interval_delta = 0.5
 
 [node name="Camera2D" type="Camera2D" parent="."]
 z_index = 3
@@ -67,25 +67,6 @@ material = SubResource("ShaderMaterial_n3pl3")
 scale = Vector2(1000, 1000)
 texture = ExtResource("3_tbksx")
 script = ExtResource("4_ipepv")
-
-[node name="TextEdit" type="TextEdit" parent="Camera2D"]
-process_mode = 3
-z_index = 3
-texture_filter = 1
-offset_left = -339.0
-offset_top = -190.0
-offset_right = -240.0
-offset_bottom = -153.0
-text = "Test"
-editable = false
-context_menu_enabled = false
-shortcut_keys_enabled = false
-selecting_enabled = false
-deselect_on_focus_loss_enabled = false
-drag_and_drop_selection_enabled = false
-virtual_keyboard_enabled = false
-middle_mouse_paste_enabled = false
-script = ExtResource("2_gmkf5")
 
 [node name="Pause Menu" type="Node2D" parent="Camera2D"]
 process_mode = 3
