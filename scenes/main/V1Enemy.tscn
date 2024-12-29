@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://c5mw43pp8t7hf"]
+
+[ext_resource type="Texture2D" uid="uid://bpgy5vj06wuyk" path="res://Assets/V1Enemy.png" id="1_6yyal"]
+[ext_resource type="Script" path="res://scripts/main/V1Enemy.gd" id="1_u6k6p"]
+[ext_resource type="Shader" path="res://shaders/shadow.gdshader" id="2_obdtr"]
+[ext_resource type="Script" path="res://scripts/main/shadow.gd" id="3_lgrse"]
+[ext_resource type="Script" path="res://classes/part_class.gd" id="5_uc62p"]
+[ext_resource type="Texture2D" uid="uid://botqu3nlk33o6" path="res://Assets/EnemyWarning.png" id="6_mih14"]
+[ext_resource type="Script" path="res://scripts/main/warning.gd" id="7_jmooj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wpi25"]
+shader = ExtResource("2_obdtr")
+shader_parameter/dir = Vector2(0.707107, 0.707107)
+shader_parameter/shadow_color = Vector4(0.5, 0.5, 0.5, 1)
+shader_parameter/len = 3.0
+shader_parameter/cutoff = 0.15
+
+[sub_resource type="Gradient" id="Gradient_7svab"]
+colors = PackedColorArray(0.90705, 0.124669, 0, 1, 0.759598, 0.81003, 3.85046e-07, 1)
+
+[node name="V1Enemy" type="Node2D" node_paths=PackedStringArray("parts")]
+process_mode = 1
+script = ExtResource("1_u6k6p")
+parts = [NodePath("Part")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_wpi25")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_6yyal")
+script = ExtResource("3_lgrse")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, 7)
+amount = 500
+emission_shape = 3
+emission_rect_extents = Vector2(1, 1)
+particle_flag_align_y = true
+direction = Vector2(0, 1)
+spread = 12.27
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 200.0
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_7svab")
+hue_variation_min = -0.56
+hue_variation_max = 0.67
+
+[node name="Part" type="Node2D" parent="."]
+script = ExtResource("5_uc62p")
+health = 1.0
+starting_health = 1.0
+size = 8.13
+Name = "Body"
+
+[node name="warning" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-29, 0)
+scale = Vector2(0.53, 0.53)
+texture = ExtResource("6_mih14")
+script = ExtResource("7_jmooj")

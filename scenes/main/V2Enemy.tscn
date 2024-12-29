@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://cjh2r1eyefb8l"]
+
+[ext_resource type="Shader" path="res://shaders/shadow.gdshader" id="1_grev7"]
+[ext_resource type="Script" path="res://scripts/main/V2Enemy.gd" id="1_wr7tp"]
+[ext_resource type="Texture2D" uid="uid://cmfcgnj5qjqnq" path="res://Assets/V2EnemyBase.png" id="2_dpq0l"]
+[ext_resource type="Script" path="res://scripts/main/shadow.gd" id="3_jbki7"]
+[ext_resource type="Texture2D" uid="uid://botqu3nlk33o6" path="res://Assets/EnemyWarning.png" id="5_2raol"]
+[ext_resource type="Texture2D" uid="uid://bvnjim03s77q4" path="res://Assets/V2EnemyCannon.png" id="5_3dl37"]
+[ext_resource type="Script" path="res://classes/part_class.gd" id="5_y07vn"]
+[ext_resource type="Script" path="res://scripts/main/warning.gd" id="6_vdxst"]
+[ext_resource type="Script" path="res://classes/gun_class.gd" id="9_rfj0b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o08c8"]
+shader = ExtResource("1_grev7")
+shader_parameter/dir = Vector2(0.707107, 0.707107)
+shader_parameter/shadow_color = Vector4(0.5, 0.5, 0.5, 1)
+shader_parameter/len = 2.0
+shader_parameter/cutoff = 0.08
+
+[sub_resource type="Gradient" id="Gradient_fqq5k"]
+colors = PackedColorArray(0.90705, 0.124669, 0, 1, 0.759598, 0.81003, 3.85046e-07, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e6r3g"]
+shader = ExtResource("1_grev7")
+shader_parameter/dir = Vector2(0.707107, 0.707107)
+shader_parameter/shadow_color = Vector4(0.5, 0.5, 0.5, 1)
+shader_parameter/len = 1.0
+shader_parameter/cutoff = 0.23
+
+[node name="V2Enemy" type="Node2D" node_paths=PackedStringArray("parts")]
+process_mode = 1
+script = ExtResource("1_wr7tp")
+parts = [NodePath("Part")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_o08c8")
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_dpq0l")
+script = ExtResource("3_jbki7")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, 9)
+amount = 800
+emission_shape = 3
+emission_rect_extents = Vector2(1, 1)
+particle_flag_align_y = true
+direction = Vector2(0, 1)
+spread = 4.27
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 200.0
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+color_ramp = SubResource("Gradient_fqq5k")
+hue_variation_min = -0.56
+hue_variation_max = 0.67
+
+[node name="Part" type="Node2D" parent="."]
+process_mode = 1
+position = Vector2(0, 0.655)
+script = ExtResource("5_y07vn")
+health = 1.5
+starting_health = 1.5
+size = 12.19
+Name = "Body"
+
+[node name="warning" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-29, 0)
+scale = Vector2(0.79, 0.79)
+texture = ExtResource("5_2raol")
+script = ExtResource("6_vdxst")
+
+[node name="Turret_Sprite" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_e6r3g")
+texture = ExtResource("5_3dl37")
+script = ExtResource("3_jbki7")
+
+[node name="Gun" type="Node2D" parent="."]
+script = ExtResource("9_rfj0b")
+interval = 0.5
+friendly = false
+speed = 500.0
+damage = 0.25
+ticking = true

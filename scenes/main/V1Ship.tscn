@@ -1,0 +1,117 @@
+[gd_scene load_steps=10 format=3 uid="uid://cnnkq0ck7enoe"]
+
+[ext_resource type="Script" path="res://scripts/main/player.gd" id="1_4txfu"]
+[ext_resource type="Texture2D" uid="uid://bvsdhf7bs70gw" path="res://Assets/V1Ship.png" id="1_cui2r"]
+[ext_resource type="Shader" path="res://shaders/shadow.gdshader" id="2_qbcsr"]
+[ext_resource type="Script" path="res://scripts/main/shadow.gd" id="4_7xti1"]
+[ext_resource type="Script" path="res://classes/part_class.gd" id="5_ulm2n"]
+[ext_resource type="Script" path="res://classes/gun_class.gd" id="6_b46a5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cpnc6"]
+shader = ExtResource("2_qbcsr")
+shader_parameter/dir = Vector2(0.707107, 0.707107)
+shader_parameter/shadow_color = Vector4(0.5, 0.5, 0.5, 1)
+shader_parameter/len = 2.0
+shader_parameter/cutoff = 0.96
+
+[sub_resource type="Gradient" id="Gradient_ohsna"]
+colors = PackedColorArray(1, 1, 1, 1, 0.682108, 0.114319, 0.805681, 1)
+
+[sub_resource type="Gradient" id="Gradient_vdpr2"]
+colors = PackedColorArray(0, 0.952941, 0.933333, 1, 1, 1, 1, 1)
+
+[node name="V1Ship" type="Node2D" node_paths=PackedStringArray("parts")]
+script = ExtResource("1_4txfu")
+parts = [NodePath("Part"), NodePath("Part3"), NodePath("Part2")]
+damage_source = Array[String](["Left Engine", "Right Engine", "Left Engine", "Right Engine", "Main Body"])
+damage_target = Array[String](["Turn Right", "Turn Left", "ParticalsLeft", "ParticalsRight", "Speed"])
+damage_scale = Array[float]([0.75, 0.75, 1.0, 1.0, 0.5])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+texture_repeat = 1
+material = SubResource("ShaderMaterial_cpnc6")
+texture = ExtResource("1_cui2r")
+script = ExtResource("4_7xti1")
+
+[node name="ParticalsLeft" type="CPUParticles2D" parent="."]
+position = Vector2(-10, 14)
+amount = 1000
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(1, 1)
+particle_flag_align_y = true
+direction = Vector2(0, 1)
+spread = 12.27
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 200.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_ohsna")
+color_initial_ramp = SubResource("Gradient_vdpr2")
+hue_variation_min = -0.56
+hue_variation_max = 0.67
+metadata/spread_max = 90.0
+metadata/spread_min = 12.0
+
+[node name="ParticalsRight" type="CPUParticles2D" parent="."]
+position = Vector2(11, 14)
+amount = 1000
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(1, 1)
+particle_flag_align_y = true
+direction = Vector2(0, 1)
+spread = 12.27
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 200.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_ohsna")
+color_initial_ramp = SubResource("Gradient_vdpr2")
+hue_variation_min = -0.56
+hue_variation_max = 0.67
+metadata/spread_max = 120.0
+metadata/spread_min = 12.0
+
+[node name="Part" type="Node2D" parent="."]
+position = Vector2(0.5, -4.675)
+script = ExtResource("5_ulm2n")
+health = 5.0
+starting_health = 5.0
+size = 10.89
+Name = "Main Body"
+
+[node name="Part2" type="Node2D" parent="."]
+position = Vector2(7, 11)
+script = ExtResource("5_ulm2n")
+health = 5.0
+starting_health = 5.0
+size = 8.0
+Name = "Right Engine"
+
+[node name="Part3" type="Node2D" parent="."]
+position = Vector2(-6, 11)
+script = ExtResource("5_ulm2n")
+health = 5.0
+starting_health = 5.0
+size = 8.0
+Name = "Left Engine"
+
+[node name="Gun" type="Node2D" parent="."]
+position = Vector2(-6, -7)
+script = ExtResource("6_b46a5")
+interval = 0.2
+speed = 500.0
+damage = 0.25
+ticking = true
+
+[node name="Gun2" type="Node2D" parent="."]
+position = Vector2(8, -7)
+script = ExtResource("6_b46a5")
+time = 0.1
+interval = 0.2
+speed = 500.0
+damage = 0.25
+ticking = true

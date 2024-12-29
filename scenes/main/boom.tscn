@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce6slkf3kjl8i"]
+
+[sub_resource type="Curve" id="Curve_ry0ht"]
+max_value = 100.0
+_data = [Vector2(0.016, 0), 0.0, 0.0, 0, 0, Vector2(1, 100), 260.797, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ama33"]
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.716216, 0.846847, 1)
+colors = PackedColorArray(0.655736, 0.108648, 2.88785e-07, 1, 1, 1, 0.0313726, 1, 0.392157, 0.392157, 0.392157, 1, 0.392157, 0.392157, 0.392157, 1)
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+emitting = false
+amount = 1000
+lifetime = 0.2
+one_shot = true
+lifetime_randomness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 392.58
+damping_max = 100.0
+damping_curve = SubResource("Curve_ry0ht")
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_ama33")

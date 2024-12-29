@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://rb8owccf5alf"]
+
+[ext_resource type="Script" path="res://scripts/main_menu/main_menu.gd" id="1_7lkss"]
+[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="2_peosn"]
+[ext_resource type="Shader" path="res://shaders/background.gdshader" id="2_ys0vu"]
+[ext_resource type="Texture2D" uid="uid://b6ygtpy03uwyn" path="res://Assets/blank.png" id="3_w7tmv"]
+[ext_resource type="Script" path="res://scenes/main_menu/background.gd" id="4_q7a32"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2uo86"]
+shader = ExtResource("2_peosn")
+shader_parameter/tint = Vector4(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l65gc"]
+shader = ExtResource("2_ys0vu")
+shader_parameter/position = Vector2(0, 0)
+shader_parameter/scale = 500.0
+shader_parameter/cutoff = 0.997
+shader_parameter/gamma = 0.14
+
+[node name="Main Menu" type="Node2D"]
+script = ExtResource("1_7lkss")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+process_mode = 3
+z_index = 2
+material = SubResource("ShaderMaterial_2uo86")
+offset_right = 679.0
+offset_bottom = 380.0
+color = Color(0, 0, 0, 0)
+
+[node name="background" type="Sprite2D" parent="."]
+process_mode = 3
+z_index = -10
+material = SubResource("ShaderMaterial_l65gc")
+position = Vector2(340, 190)
+scale = Vector2(1000, 1000)
+texture = ExtResource("3_w7tmv")
+script = ExtResource("4_q7a32")
+
+[node name="Button" type="Button" parent="."]
+process_mode = 3
+z_index = 3
+texture_filter = 1
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 256.0
+offset_bottom = 128.0
+text = "Play"
+
+[node name="exit" type="Button" parent="."]
+process_mode = 3
+z_index = 3
+texture_filter = 1
+offset_left = 64.0
+offset_top = 208.0
+offset_right = 256.0
+offset_bottom = 272.0
+text = "Quit Game"
+
+[node name="settings" type="Button" parent="."]
+z_index = 3
+texture_filter = 1
+offset_left = 64.0
+offset_top = 136.0
+offset_right = 256.0
+offset_bottom = 200.0
+text = "Settings"
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="exit" to="." method="_on_exit_button_down"]

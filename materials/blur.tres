@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dvk7c1gwgooq2"]
+
+[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="1_w12bn"]
+
+[resource]
+shader = ExtResource("1_w12bn")
+shader_parameter/tint = Vector4(1, 1, 1, 1)
