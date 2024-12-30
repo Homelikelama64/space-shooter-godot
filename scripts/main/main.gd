@@ -5,13 +5,12 @@ var blur_material_resource = preload("res://materials/blur.tres")
 func _ready() -> void:
 	Global.enemies = []
 	Global.bullets = []
-	Global.debug = false
 	Global.paused = false
 	Global.dead = false
 	Global.player = %player
+	Global.time = 0.0
 	get_tree().paused = false
 
-var time = 0.0;
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(dt: float) -> void:
 	if Input.is_action_just_pressed("pause"):
@@ -21,7 +20,7 @@ func _process(dt: float) -> void:
 		if !temp:
 			Global.paused = true
 	if !(Global.paused || Global.dead):
-		time += dt
+		Global.time += dt
 	get_tree().paused = Global.paused || Global.dead
 	var blur:ColorRect = get_node("Camera2D/ColorRect")
 	var health_display:ItemList = get_node("Camera2D/ItemList")
@@ -47,7 +46,7 @@ func _process(dt: float) -> void:
 	else:
 		death_screen.visible = false
 	var timer = get_node("Camera2D/timer")
-	timer.text = str(time).pad_decimals(1) + "s"
+	timer.text = str(Global.time).pad_decimals(1) + "s"
 
 
 func _on_resume_button_down() -> void:
@@ -56,6 +55,7 @@ func _on_resume_button_down() -> void:
 
 func _on_exit_button_down() -> void:
 	get_tree().quit(0)
+	Global.save()
 
 
 func _on_restart() -> void:
@@ -63,7 +63,4 @@ func _on_restart() -> void:
 
 
 func _on_main_menu_button_down() -> void:
-	#Global.debug = false
-	#Global.paused = false
-	#Global.dead = false
 	Global.switch_scene("res://scenes/main_menu.tscn")

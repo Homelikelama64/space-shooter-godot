@@ -1,16 +1,27 @@
 extends Node
 
+var save_path = "user://settings"
+
 var enemies:Array[Node2D] = []
 var bullets:Array[Node2D] = []
 var debug:bool = false
 var paused:bool = false
 var dead:bool = false
+var time = 0.0
+
+var display_percentage:bool = false
+var high_score = 0.0
 
 var player:Node2D
 var explosion_resoure = preload("res://scenes/main/boom.tscn")
 
+func _enter_tree() -> void:
+	load_data()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if time > high_score:
+		high_score = time
 	if Input.is_action_just_pressed("debug"):
 		var temp = debug
 		if temp:
@@ -93,7 +104,6 @@ func _ready() -> void:
 	current_scene = root.get_child(root.get_child_count() - 1)
 	Global.enemies = []
 	Global.bullets = []
-	Global.debug = false
 	Global.paused = false
 	Global.dead = false
 	get_tree().paused = false
@@ -110,7 +120,26 @@ func _deferred_switch_scene(res_path):
 
 
 func _exit_tree() -> void:
-	Global.debug = false
 	Global.paused = false
 	Global.dead = false
 	get_tree().paused = false
+	save()
+
+func save():
+	var file = FileAccess.open(save_path,FileAccess.WRITE)
+	file.store_var(display_percentage)
+	file.store_var(debug)
+	file.store_var(high_score)
+
+func load_data():
+	if FileAccess.file_exists(save_path):
+		var file = FileAccess.open(save_path,FileAccess.READ)
+		print(file.get_path_absolute())
+		display_percentage = file.get_var(display_percentage)
+		debug = file.get_var(debug)
+		high_score = file.get_var(high_score)
+	else:
+		print("No File Found...")
+		display_percentage = false
+		debug = false
+		high_score = 0.0

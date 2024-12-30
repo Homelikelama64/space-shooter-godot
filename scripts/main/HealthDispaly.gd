@@ -11,4 +11,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	clear()
 	for part in player.parts:
-		add_item(part.Name + ":" + str(part.health / part.starting_health * 100.0).pad_decimals(0) + "%",null,false)
+		if Global.display_percentage:
+			add_item(part.Name + ":" + str(part.health / part.starting_health * 100.0).pad_decimals(0) + "%",null,false)
+		else:
+			add_item(part.Name + ":" + str(part.health).pad_decimals(1) + "/" + str(part.starting_health).pad_decimals(1),null,false)
