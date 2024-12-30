@@ -20,8 +20,6 @@ func _enter_tree() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if time > high_score:
-		high_score = time
 	if Input.is_action_just_pressed("debug"):
 		var temp = debug
 		if temp:

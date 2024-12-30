@@ -21,6 +21,8 @@ func _process(dt: float) -> void:
 			Global.paused = true
 	if !(Global.paused || Global.dead):
 		Global.time += dt
+	if Global.time > Global.high_score:
+		Global.high_score = Global.time
 	get_tree().paused = Global.paused || Global.dead
 	var blur:ColorRect = get_node("Camera2D/ColorRect")
 	var health_display:ItemList = get_node("Camera2D/ItemList")
