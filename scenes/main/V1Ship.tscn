@@ -20,9 +20,10 @@ colors = PackedColorArray(1, 1, 1, 1, 0.682108, 0.114319, 0.805681, 1)
 [sub_resource type="Gradient" id="Gradient_vdpr2"]
 colors = PackedColorArray(0, 0.952941, 0.933333, 1, 1, 1, 1, 1)
 
-[node name="V1Ship" type="Node2D" node_paths=PackedStringArray("parts")]
+[node name="V1Ship" type="Node2D" node_paths=PackedStringArray("parts", "guns")]
 script = ExtResource("1_4txfu")
 parts = [NodePath("Part"), NodePath("Part3"), NodePath("Part2")]
+guns = [NodePath("Gun"), NodePath("Gun2")]
 damage_source = Array[String](["Left Engine", "Right Engine", "Left Engine", "Right Engine", "Main Body"])
 damage_target = Array[String](["Turn Right", "Turn Left", "ParticalsLeft", "ParticalsRight", "Speed"])
 damage_scale = Array[float]([0.75, 0.75, 1.0, 1.0, 0.5])

@@ -10,6 +10,7 @@ var turn_speed_left = turn_speed_left_original
 var turn_speed_right = turn_speed_right_original
 
 @export var parts:Array[Part] = []
+@export var guns:Array[Gun] = []
 @export var damage_source:Array[String] = []
 @export var damage_target:Array[String] = []
 @export var damage_scale:Array[float] = []
@@ -57,8 +58,11 @@ func _process(dt: float) -> void:
 		get_node("Gun2").ticking = false
 	get_node("Gun").angle = global_rotation
 	get_node("Gun2").angle = global_rotation
-	ammo = get_node("Gun").ammo + get_node("Gun2").ammo
-	total_ammo = get_node("Gun").total_ammo + get_node("Gun2").total_ammo
+	ammo = 0
+	total_ammo = 0
+	for gun in guns:
+		ammo += gun.ammo
+		total_ammo += gun.total_ammo 
 
 func _physics_process(dt: float) -> void:
 	velocity += angle_to_vector(rotation) * (ship_speed - (velocity.length() * (2.0 + (velocity.normalized().dot(angle_to_vector(rotation)))) / 2.0)) * dt
