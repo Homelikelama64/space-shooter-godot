@@ -7,7 +7,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vtl28"]
 shader = ExtResource("1_w4yhh")
 shader_parameter/health = 1.0
-shader_parameter/health_color = Vector4(0.5, 1, 0.5, 1)
+shader_parameter/health_color = Vector4(0.6, 0.431, 0.431, 1)
 shader_parameter/start = 1.0
 shader_parameter/end = 1.0
 shader_parameter/mask = ExtResource("2_5kvw5")
