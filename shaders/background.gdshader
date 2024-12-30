@@ -13,7 +13,8 @@ float random(inout uint state){
 }
 
 void fragment() {
-	vec2 pos = vec2(round(UV.x * scale + position.x / 2.0 + 100000.0),round(UV.y * scale + position.y / 2.0 + 10000.0));
+	vec2 unrounded = vec2(UV.x * scale + position.x / 2.0 + 100000.0,UV.y * scale + position.y / 2.0 + 10000.0);
+	vec2 pos = vec2(round(unrounded.x),round(unrounded.y));
 	uint state = uint(pos.x * pos.y);
 	float value = random(state);
 	vec4 output = vec4(0.05,0.05,0.05,1.0);

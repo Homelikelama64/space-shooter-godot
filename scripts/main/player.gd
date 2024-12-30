@@ -45,12 +45,8 @@ func _process(dt: float) -> void:
 		rotation_degrees -= turn_speed_left * dt
 	if Input.is_action_pressed("turn_right"):
 		rotation_degrees += turn_speed_right * dt
-	var shoot = false
-	for enemy in Global.enemies:
-		if (enemy.position - position).normalized().dot(angle_to_vector(rotation)) > 0.8 && (enemy.position - position).length() < 500.0:
-			shoot = true
 			
-	if shoot:
+	if Input.is_action_pressed("shoot"):
 		get_node("Gun").ticking = true
 		get_node("Gun2").ticking = true
 	else:

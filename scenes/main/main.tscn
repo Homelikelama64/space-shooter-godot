@@ -13,7 +13,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n3pl3"]
 shader = ExtResource("1_18s1q")
-shader_parameter/position = Vector2(0, 0)
+shader_parameter/position = Vector2(4.065, 0)
 shader_parameter/scale = 500.0
 shader_parameter/cutoff = 0.997
 shader_parameter/gamma = 0.14
