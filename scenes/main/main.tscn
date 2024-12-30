@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://2vrar5oimq7w"]
+[gd_scene load_steps=15 format=3 uid="uid://2vrar5oimq7w"]
 
 [ext_resource type="Script" path="res://scripts/main/Camera2D.gd" id="1_3ni0c"]
 [ext_resource type="Shader" path="res://shaders/background.gdshader" id="1_18s1q"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://cxlv8frg7bb5j" path="res://scenes/main_menu/settings.tscn" id="10_kv6x2"]
 [ext_resource type="Script" path="res://scripts/main/HealthDispaly.gd" id="10_xetaq"]
 [ext_resource type="PackedScene" uid="uid://bm17tx1od4ayg" path="res://scenes/main/repair.tscn" id="11_yoaq2"]
+[ext_resource type="PackedScene" uid="uid://bb7wqftw37ooe" path="res://scenes/main/healthBar.tscn" id="12_15pch"]
+[ext_resource type="Script" path="res://scenes/main/ammo.gd" id="13_uycqb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n3pl3"]
 shader = ExtResource("1_18s1q")
@@ -35,6 +37,7 @@ process_mode = 1
 script = ExtResource("8_ugngb")
 time = 4.0
 min_interval = 3.0
+extra_spawn_chance = 0.05
 
 [node name="Wave2" type="Node2D" parent="."]
 process_mode = 1
@@ -162,7 +165,9 @@ same_column_width = true
 item_0/text = "Main Body: 75%"
 item_0/selectable = false
 item_1/text = "Left Engine: 50%"
+item_1/selectable = false
 item_2/text = "Right Engine: 100%"
+item_2/selectable = false
 script = ExtResource("10_xetaq")
 
 [node name="timer" type="Label" parent="Camera2D"]
@@ -175,6 +180,10 @@ offset_bottom = -128.0
 text = "0.0s"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="bar" parent="Camera2D" instance=ExtResource("12_15pch")]
+position = Vector2(0, 176)
+script = ExtResource("13_uycqb")
 
 [connection signal="button_down" from="Camera2D/Pause Menu/resume" to="." method="_on_resume_button_down"]
 [connection signal="button_down" from="Camera2D/Pause Menu/exit" to="." method="_on_exit_button_down"]

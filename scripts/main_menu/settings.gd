@@ -9,8 +9,8 @@ var was_visible = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#if was_visible != visible:
-	get_node("VBoxContainer/display_percentage").button_pressed = Global.display_percentage
-	get_node("VBoxContainer/debug").button_pressed = Global.debug
+	get_node("TabContainer/General/display_percentage").button_pressed = Global.display_percentage
+	get_node("TabContainer/General/debug").button_pressed = Global.debug
 	was_visible = visible
 
 

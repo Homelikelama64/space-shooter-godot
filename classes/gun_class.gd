@@ -8,6 +8,8 @@ class_name Gun
 @export var speed = 32.0
 @export var damage = 1.0
 @export var duration = 1.0
+@export var ammo = 100
+@export var total_ammo = 100
 @export var ticking = false
 
 var bullet_resource = preload("res://scenes/main/bullet.tscn")
@@ -22,12 +24,14 @@ func _process(dt: float) -> void:
 	if ticking:
 		time += dt
 	while time > interval:
+		ammo -= 1
 		time -= interval
-		var bullet:Node2D = bullet_resource.instantiate()
-		bullet.global_position = global_position
-		bullet.rotation = angle
-		bullet.friendly = friendly
-		bullet.speed = speed
-		bullet.damage = damage
-		bullet.duration = duration
-		get_node("/root/Main").add_child(bullet)
+		if ammo > 0:
+			var bullet:Node2D = bullet_resource.instantiate()
+			bullet.global_position = global_position
+			bullet.rotation = angle
+			bullet.friendly = friendly
+			bullet.speed = speed
+			bullet.damage = damage
+			bullet.duration = duration
+			get_node("/root/Main").add_child(bullet)

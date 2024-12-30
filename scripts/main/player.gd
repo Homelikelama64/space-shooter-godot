@@ -14,6 +14,9 @@ var turn_speed_right = turn_speed_right_original
 @export var damage_target:Array[String] = []
 @export var damage_scale:Array[float] = []
 
+@export var ammo:int
+@export var total_ammo:int
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -54,6 +57,8 @@ func _process(dt: float) -> void:
 		get_node("Gun2").ticking = false
 	get_node("Gun").angle = global_rotation
 	get_node("Gun2").angle = global_rotation
+	ammo = get_node("Gun").ammo + get_node("Gun2").ammo
+	total_ammo = get_node("Gun").total_ammo + get_node("Gun2").total_ammo
 
 func _physics_process(dt: float) -> void:
 	velocity += angle_to_vector(rotation) * (ship_speed - (velocity.length() * (2.0 + (velocity.normalized().dot(angle_to_vector(rotation)))) / 2.0)) * dt

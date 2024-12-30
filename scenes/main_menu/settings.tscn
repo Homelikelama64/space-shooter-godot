@@ -14,16 +14,19 @@ script = ExtResource("1_3x5n5")
 z_index = -1
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 2
 
-[node name="display_percentage" type="CheckButton" parent="VBoxContainer"]
+[node name="General" type="VBoxContainer" parent="TabContainer"]
+layout_mode = 2
+
+[node name="display_percentage" type="CheckButton" parent="TabContainer/General"]
 layout_mode = 2
 text = "Display Percentage"
 
-[node name="debug" type="CheckButton" parent="VBoxContainer"]
+[node name="debug" type="CheckButton" parent="TabContainer/General"]
 layout_mode = 2
 text = "Debug"
 
-[connection signal="toggled" from="VBoxContainer/display_percentage" to="." method="_on_check_button_toggled"]
-[connection signal="toggled" from="VBoxContainer/debug" to="." method="_on_debug_toggled"]
+[connection signal="toggled" from="TabContainer/General/display_percentage" to="." method="_on_check_button_toggled"]
+[connection signal="toggled" from="TabContainer/General/debug" to="." method="_on_debug_toggled"]
