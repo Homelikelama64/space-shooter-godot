@@ -79,8 +79,8 @@ metadata/spread_min = 12.0
 [node name="Part" type="Node2D" parent="."]
 position = Vector2(0.5, -4.675)
 script = ExtResource("5_ulm2n")
-health = 2.5
-starting_health = 2.5
+health = 3.5
+starting_health = 3.5
 regen = 0.01
 size = 10.89
 Name = "Main Body"

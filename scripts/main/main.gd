@@ -49,6 +49,9 @@ func _process(dt: float) -> void:
 		death_screen.visible = false
 	var timer = get_node("Camera2D/timer")
 	timer.text = str(Global.time).pad_decimals(1) + "s"
+	
+	var ammo = float(Global.player.ammo) / float(Global.player.total_ammo)
+	get_node("Camera2D/ammo_bar").health = ammo
 
 
 func _on_resume_button_down() -> void:

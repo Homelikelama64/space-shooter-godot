@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://2vrar5oimq7w"]
+[gd_scene load_steps=18 format=3 uid="uid://2vrar5oimq7w"]
 
 [ext_resource type="Script" path="res://scripts/main/Camera2D.gd" id="1_3ni0c"]
 [ext_resource type="Shader" path="res://shaders/background.gdshader" id="1_18s1q"]
@@ -12,8 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://cxlv8frg7bb5j" path="res://scenes/main_menu/settings.tscn" id="10_kv6x2"]
 [ext_resource type="Script" path="res://scripts/main/HealthDispaly.gd" id="10_xetaq"]
 [ext_resource type="PackedScene" uid="uid://bm17tx1od4ayg" path="res://scenes/main/repair.tscn" id="11_yoaq2"]
-[ext_resource type="PackedScene" uid="uid://bb7wqftw37ooe" path="res://scenes/main/healthBar.tscn" id="12_15pch"]
-[ext_resource type="Script" path="res://scripts/main/ammo.gd" id="13_uycqb"]
+[ext_resource type="PackedScene" uid="uid://bb7wqftw37ooe" path="res://scenes/main/percentage_bar.tscn" id="13_ewsw4"]
+[ext_resource type="Shader" path="res://shaders/health bar.gdshader" id="14_xq2go"]
+[ext_resource type="Texture2D" uid="uid://ciyphw504sv4m" path="res://Assets/health_bar_mask.png" id="15_xc1p2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n3pl3"]
 shader = ExtResource("1_18s1q")
@@ -21,6 +22,15 @@ shader_parameter/position = Vector2(4.065, 0)
 shader_parameter/scale = 500.0
 shader_parameter/cutoff = 0.997
 shader_parameter/gamma = 0.14
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l3eut"]
+shader = ExtResource("14_xq2go")
+shader_parameter/health = 0.5
+shader_parameter/health_color = Vector4(0.6, 0.431373, 0.431373, 1)
+shader_parameter/dead_color = Vector4(0.27451, 0.196078, 0.196078, 1)
+shader_parameter/start = 1.0
+shader_parameter/end = 1.0
+shader_parameter/mask = ExtResource("15_xc1p2")
 
 [node name="Main" type="Node2D"]
 process_mode = 3
@@ -187,9 +197,21 @@ text = "0.0s"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="bar" parent="Camera2D" instance=ExtResource("12_15pch")]
+[node name="ammo_bar" parent="Camera2D" instance=ExtResource("13_ewsw4")]
+material = SubResource("ShaderMaterial_l3eut")
 position = Vector2(0, 176)
-script = ExtResource("13_uycqb")
+on_color = Color(0.6, 0.431373, 0.431373, 1)
+off_color = Color(0.27451, 0.196078, 0.196078, 1)
+
+[node name="ammoLabel" type="Label" parent="Camera2D"]
+z_index = 3
+texture_filter = 1
+offset_left = -50.0
+offset_top = 152.0
+offset_right = 50.0
+offset_bottom = 175.0
+text = "Ammo"
+horizontal_alignment = 1
 
 [connection signal="button_down" from="Camera2D/Pause Menu/resume" to="." method="_on_resume_button_down"]
 [connection signal="button_down" from="Camera2D/Pause Menu/exit" to="." method="_on_exit_button_down"]
